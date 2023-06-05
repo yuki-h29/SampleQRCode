@@ -1,0 +1,3 @@
+//info.plistにこちらの値を追加する必要あり　カメラの権限設定
+Key: Privacy - Camera Usage Description
+Value: カメラを使うよ！！！
