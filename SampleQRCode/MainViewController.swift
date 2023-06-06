@@ -19,22 +19,24 @@ class MainViewController: UIViewController {
         button.setTitle("カメラ起動", for: .normal)
         button.addTarget(self, action: #selector(tapedAudio), for: .touchUpInside)
         view.addSubview(button)
-        
-        
     }
-  
-    // MARK: - ボタンアクション
-    @objc  func tapedAudio(sender: UIButton) {
+}
+
+// ボタンアクションに関連するメソッドをextensionで分離
+extension MainViewController {
+    // ボタンアクション
+    @objc func tapedAudio(sender: UIButton) {
         self.present(AudioViewController(), animated: true, completion: nil)
     }
-    
-    // MARK: - カメラ利用の承認申請アラート表示メソッド
+}
+
+// カメラ利用の承認申請アラート表示メソッドをextensionで分離
+extension MainViewController {
     func allowedRequestStatus() -> Bool{
         var avState = false
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             avState = true
-            break
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video, completionHandler: { granted in
                 DispatchQueue.main.async {
@@ -43,7 +45,6 @@ class MainViewController: UIViewController {
             })
         default:
             avState =  false
-            break
         }
         return avState
     }
